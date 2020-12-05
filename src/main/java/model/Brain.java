@@ -10,6 +10,8 @@ import java.util.Iterator;
 
 public class Brain {
 
+    boolean didShowGraphs = false;
+
     String fuzzyDriverPath;
     int amountOfVariables;
 
@@ -33,6 +35,9 @@ public class Brain {
         fuzzyRuleSet.evaluate();
 
         Variable variable = fuzzyRuleSet.getVariable(resultVariableName);
+
+        System.out.println(variable);
+
         LinguisticTerm strongestLinguisticTerm = null;
         double strongestValue = 0;
         LinguisticTerm linguisticTerm;
@@ -50,5 +55,29 @@ public class Brain {
 
         assert strongestLinguisticTerm != null;
         return strongestLinguisticTerm.getTermName();
+    }
+
+    public double calculateResultDouble(String[] variableNames, Double[] variableValues, String resultVariableName) throws Exception {
+        if (variableNames.length != amountOfVariables || variableValues.length != amountOfVariables) {
+            throw new InvalidAttributesException("The amount of variables in method attributes is different, than what was specified during Brain() creation.");
+        }
+
+        FIS fis = FIS.load(this.fuzzyDriverPath, false);
+        FuzzyRuleSet fuzzyRuleSet = fis.getFuzzyRuleSet();
+
+        if( !didShowGraphs ){
+            fuzzyRuleSet.chart();
+            didShowGraphs = true;
+        }
+
+        for (int i = 0; i < amountOfVariables; i++) {
+            fuzzyRuleSet.setVariable(variableNames[i], variableValues[i]);
+        }
+
+        fuzzyRuleSet.evaluate();
+
+        Variable variable = fuzzyRuleSet.getVariable(resultVariableName);
+
+        return variable.getLatestDefuzzifiedValue();
     }
 }

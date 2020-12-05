@@ -1,31 +1,76 @@
 FUNCTION_BLOCK
 
 VAR_INPUT
-poziom_natezenia : REAL;
-pora_dnia : REAL;
+sensor_0 : REAL;
+sensor_1 : REAL;
+sensor_2 : REAL;
+sensor_3 : REAL;
+sensor_4 : REAL;
+sensor_5 : REAL;
+sensor_6 : REAL;
+sensor_7 : REAL;
 END_VAR
 VAR_OUTPUT
-zmiana_natezenia : REAL;
+movement : REAL;
 END_VAR
 
-FUZZIFY poziom_natezenia
-TERM bardzoCicho := (0, 1) (10, 1) (20, 0.50) (30, 0);
-TERM cicho := (10, 0) (20, 0.50) (30, 1) (40, 1) (50, 0.50) (60, 0);
-TERM glosno := (40, 0) (50, 0.50) (60, 1) (70, 1) (80, 0.50) (90, 0);
-TERM bardzoGlosno := (70, 0) (80, 0.50) (90, 1) (100, 1);
+FUZZIFY sensor_0
+TERM really_close := (0, 1) (1, 1) (2, 0);
+TERM pretty_close := (1, 0) (2, 1) (5, 0);
+TERM quite_far := (4, 0) (6, 1) (10,1);
 END_FUZZIFY
 
-FUZZIFY pora_dnia
-TERM ranek := (1, 0) (3, 0.50) (5, 1) (7, 1) (9, 0.50) (11, 0);
-TERM poludnie := (7, 0) (9, 0.50) (11, 1) (13, 1) (15, 0.50) (17, 0);
-TERM wieczor := (13, 0) (15, 0.50) (17, 1) (19, 1) (21, 0.50) (23, 0);
-TERM noc := (0,1) (1, 1) (3, 0.50) (5, 0) (19, 0) (21, 0.50) (23, 1);
+FUZZIFY sensor_1
+TERM really_close := (0, 1) (1, 1) (2, 0);
+TERM pretty_close := (1, 0) (2, 1) (5, 0);
+TERM quite_far := (4, 0) (6, 1) (10,1);
 END_FUZZIFY
 
-DEFUZZIFY zmiana_natezenia
-TERM przycisz := (0, 1) (2, 1) (3, 0.50) (4, 0) (7, 0);
-TERM zostaw := (2, 0) (3, 0.50) (4, 1) (6, 1) (7, 0.50) (8, 0);
-TERM podglosnij := (3, 0) (6, 0) (7, 0.50) (8, 1) (10, 1);
+FUZZIFY sensor_2
+TERM really_close := (0, 1) (1, 1) (2, 0);
+TERM pretty_close := (1, 0) (2, 1) (5, 0);
+TERM quite_far := (4, 0) (6, 1) (10,1);
+END_FUZZIFY
+
+FUZZIFY sensor_3
+TERM really_close := (0, 1) (1, 1) (2, 0);
+TERM pretty_close := (1, 0) (2, 1) (5, 0);
+TERM quite_far := (4, 0) (6, 1) (10,1);
+END_FUZZIFY
+
+FUZZIFY sensor_4
+TERM really_close := (0, 1) (1, 1) (2, 0);
+TERM pretty_close := (1, 0) (2, 1) (5, 0);
+TERM quite_far := (4, 0) (6, 1) (10,1);
+END_FUZZIFY
+
+FUZZIFY sensor_5
+TERM really_close := (0, 1) (1, 1) (2, 0);
+TERM pretty_close := (1, 0) (2, 1) (5, 0);
+TERM quite_far := (4, 0) (6, 1) (10,1);
+END_FUZZIFY
+
+FUZZIFY sensor_6
+TERM really_close := (0, 1) (1, 1) (2, 0);
+TERM pretty_close := (1, 0) (2, 1) (5, 0);
+TERM quite_far := (4, 0) (6, 1) (10,1);
+END_FUZZIFY
+
+FUZZIFY sensor_7
+TERM really_close := (0, 1) (1, 1) (2, 0);
+TERM pretty_close := (1, 0) (2, 1) (5, 0);
+TERM quite_far := (4, 0) (6, 1) (10,1);
+END_FUZZIFY
+
+DEFUZZIFY movement
+TERM angle_0 := (-15, 0) (0, 1) (45, 1) (60, 0);
+TERM angle_1 := (30, 0) (45, 1) (90, 1) (105, 0);
+TERM angle_2 := (75, 0) (90, 1) (135, 1) (150, 0);
+TERM angle_3 := (120, 0) (135, 1) (180, 1) (195, 0);
+TERM angle_4 := (165, 0) (180, 1) (225, 1) (240, 0);
+TERM angle_5 := (210, 0) (225, 1) (270, 1) (285, 0);
+TERM angle_6 := (255, 0) (270, 1) (315, 1) (330, 0);
+TERM angle_7 := (300, 0) (315, 1) (360, 1) (375, 0);
 METHOD : COG;
 DEFAULT := 0;
 END_DEFUZZIFY
@@ -34,25 +79,50 @@ RULEBLOCK first
 AND: MIN;
 ACT: MIN;
 
-RULE 0: IF poziom_natezenia IS bardzoCicho AND pora_dnia IS ranek THEN zmiana_natezenia IS podglosnij;
-RULE 1: IF poziom_natezenia IS cicho AND pora_dnia IS ranek THEN zmiana_natezenia IS zostaw;
-RULE 2: IF poziom_natezenia IS glosno AND pora_dnia IS ranek THEN zmiana_natezenia IS zostaw;
-RULE 3: IF poziom_natezenia IS bardzoGlosno AND pora_dnia IS ranek THEN zmiana_natezenia IS przycisz;
+RULE 0: IF sensor_0 IS really_close AND sensor_1 IS really_close THEN movement IS angle_6;
+RULE 1: IF sensor_1 IS really_close AND sensor_2 IS really_close THEN movement IS angle_7;
+RULE 2: IF sensor_2 IS really_close AND sensor_3 IS really_close THEN movement IS angle_0;
+RULE 3: IF sensor_3 IS really_close AND sensor_4 IS really_close THEN movement IS angle_1;
+RULE 4: IF sensor_4 IS really_close AND sensor_5 IS really_close THEN movement IS angle_2;
+RULE 5: IF sensor_5 IS really_close AND sensor_6 IS really_close THEN movement IS angle_3;
+RULE 6: IF sensor_6 IS really_close AND sensor_7 IS really_close THEN movement IS angle_4;
+RULE 7: IF sensor_7 IS really_close AND sensor_0 IS really_close THEN movement IS angle_5;
 
-RULE 4: IF poziom_natezenia IS bardzoCicho AND pora_dnia IS poludnie THEN zmiana_natezenia IS podglosnij;
-RULE 5: IF poziom_natezenia IS cicho AND pora_dnia IS poludnie THEN zmiana_natezenia IS podglosnij;
-RULE 6: IF poziom_natezenia IS glosno AND pora_dnia IS poludnie THEN zmiana_natezenia IS zostaw;
-RULE 7: IF poziom_natezenia IS bardzoGlosno AND pora_dnia IS poludnie THEN zmiana_natezenia IS przycisz;
+RULE 8: IF sensor_0 IS quite_far AND sensor_1 IS quite_far THEN movement IS angle_2;
+RULE 9: IF sensor_1 IS quite_far AND sensor_2 IS quite_far THEN movement IS angle_3;
+RULE 10: IF sensor_2 IS quite_far AND sensor_3 IS quite_far THEN movement IS angle_4;
+RULE 11: IF sensor_3 IS quite_far AND sensor_4 IS quite_far THEN movement IS angle_5;
+RULE 12: IF sensor_4 IS quite_far AND sensor_5 IS quite_far THEN movement IS angle_6;
+RULE 13: IF sensor_5 IS quite_far AND sensor_6 IS quite_far THEN movement IS angle_7;
+RULE 14: IF sensor_6 IS quite_far AND sensor_7 IS quite_far THEN movement IS angle_0;
+RULE 15: IF sensor_7 IS quite_far AND sensor_0 IS quite_far THEN movement IS angle_1;
 
-RULE 8: IF poziom_natezenia IS bardzoCicho AND pora_dnia IS wieczor THEN zmiana_natezenia IS podglosnij;
-RULE 9: IF poziom_natezenia IS cicho AND pora_dnia IS wieczor THEN zmiana_natezenia IS zostaw;
-RULE 10: IF poziom_natezenia IS glosno AND pora_dnia IS wieczor THEN zmiana_natezenia IS przycisz;
-RULE 11: IF poziom_natezenia IS bardzoGlosno AND pora_dnia IS wieczor THEN zmiana_natezenia IS przycisz;
+RULE 16: IF sensor_0 IS really_close AND sensor_2 IS pretty_close THEN movement IS angle_5;
+RULE 17: IF sensor_1 IS really_close AND sensor_3 IS pretty_close THEN movement IS angle_6;
+RULE 18: IF sensor_2 IS really_close AND sensor_4 IS pretty_close THEN movement IS angle_7;
+RULE 19: IF sensor_3 IS really_close AND sensor_5 IS pretty_close THEN movement IS angle_0;
+RULE 20: IF sensor_4 IS really_close AND sensor_6 IS pretty_close THEN movement IS angle_1;
+RULE 21: IF sensor_5 IS really_close AND sensor_7 IS pretty_close THEN movement IS angle_2;
+RULE 22: IF sensor_6 IS really_close AND sensor_0 IS pretty_close THEN movement IS angle_3;
+RULE 23: IF sensor_7 IS really_close AND sensor_1 IS pretty_close THEN movement IS angle_4;
 
-RULE 12: IF poziom_natezenia IS bardzoCicho AND pora_dnia IS noc THEN zmiana_natezenia IS zostaw;
-RULE 13: IF poziom_natezenia IS cicho AND pora_dnia IS noc THEN zmiana_natezenia IS zostaw;
-RULE 14: IF poziom_natezenia IS glosno AND pora_dnia IS noc THEN zmiana_natezenia IS przycisz;
-RULE 15: IF poziom_natezenia IS bardzoGlosno AND pora_dnia IS noc THEN zmiana_natezenia IS przycisz;
+RULE 24: IF sensor_0 IS really_close AND sensor_6 IS pretty_close THEN movement IS angle_3;
+RULE 25: IF sensor_1 IS really_close AND sensor_7 IS pretty_close THEN movement IS angle_4;
+RULE 26: IF sensor_2 IS really_close AND sensor_0 IS pretty_close THEN movement IS angle_5;
+RULE 27: IF sensor_3 IS really_close AND sensor_1 IS pretty_close THEN movement IS angle_6;
+RULE 28: IF sensor_4 IS really_close AND sensor_2 IS pretty_close THEN movement IS angle_7;
+RULE 29: IF sensor_5 IS really_close AND sensor_3 IS pretty_close THEN movement IS angle_0;
+RULE 30: IF sensor_6 IS really_close AND sensor_4 IS pretty_close THEN movement IS angle_1;
+RULE 31: IF sensor_7 IS really_close AND sensor_5 IS pretty_close THEN movement IS angle_2;
+
+RULE 32: IF sensor_0 IS pretty_close THEN movement IS angle_5;
+RULE 33: IF sensor_1 IS pretty_close THEN movement IS angle_6;
+RULE 34: IF sensor_2 IS pretty_close THEN movement IS angle_7;
+RULE 35: IF sensor_3 IS pretty_close THEN movement IS angle_0;
+RULE 36: IF sensor_4 IS pretty_close THEN movement IS angle_1;
+RULE 37: IF sensor_5 IS pretty_close THEN movement IS angle_2;
+RULE 38: IF sensor_6 IS pretty_close THEN movement IS angle_3;
+RULE 39: IF sensor_7 IS pretty_close THEN movement IS angle_4;
 
 END_RULEBLOCK
 

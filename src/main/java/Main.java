@@ -21,12 +21,12 @@ public class Main {
             int poziomNatezenia = Integer.parseInt(args[1]);
             int poraDnia = Integer.parseInt(args[2]);
 
-
-            Brain temp = new Brain(pathToDriver, 2);
-            String result = temp.calculateResult(new String[]{"poziom_natezenia", "pora_dnia"}, new Double[]{(double)poziomNatezenia, (double)poraDnia}, "zmiana_natezenia");
+/*
+            Brain temp = new Brain(pathToDriver, 8);
+            double result = temp.calculateResultDouble(new String[]{"sensor_0", "sensor_1", "sensor_2", "sensor_3", "sensor_4", "sensor_5", "sensor_6", "sensor_7"}, new Double[]{0.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0}, "movement");
             System.out.println(result);
-
-
+*/
+            new Game().main(new String[]{pathToDriver});
 
 
             /*
