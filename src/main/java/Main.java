@@ -1,3 +1,4 @@
+import model.Brain;
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.rule.FuzzyRuleSet;
 
@@ -16,25 +17,39 @@ public class Main {
     private static void start(String[] args){
 
         try {
-            String fileName = args[0];
+            String pathToDriver = args[0];
             int poziomNatezenia = Integer.parseInt(args[1]);
             int poraDnia = Integer.parseInt(args[2]);
-            FIS fis = FIS.load(fileName,false);
 
+
+            Brain temp = new Brain(pathToDriver, 2);
+            String result = temp.calculateResult(new String[]{"poziom_natezenia", "pora_dnia"}, new Double[]{(double)poziomNatezenia, (double)poraDnia}, "zmiana_natezenia");
+            System.out.println(result);
+
+
+
+
+            /*
+            FIS fis = FIS.load(pathToDriver,false);
 //wyswietl wykresy funkcji fuzyfikacji i defuzyfikacji
             FuzzyRuleSet fuzzyRuleSet = fis.getFuzzyRuleSet();
-            fuzzyRuleSet.chart();
-
+            //fuzzyRuleSet.chart();
 //zadaj wartosci wejsciowe
             fuzzyRuleSet.setVariable("poziom_natezenia", poziomNatezenia);
             fuzzyRuleSet.setVariable("pora_dnia", poraDnia);
 //logika sterownika
             fuzzyRuleSet.evaluate();
-
 //graficzna prezentacja wyjscia
+            //System.out.println(fuzzyRuleSet.getVariable("zmiana_natezenia").getLinguisticTerm("podglosnij"));
+            System.out.println(fuzzyRuleSet);
             fuzzyRuleSet.getVariable("zmiana_natezenia").chartDefuzzifier(true);
-
 //System.out.println(fuzzyRuleSet);
+            System.out.println("######################\n\n\n\n");
+            */
+
+
+
+
 
         } catch (Exception ex) {
             System.out.println(ex.toString());
