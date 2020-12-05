@@ -21,6 +21,15 @@ public class Main {
             int poziomNatezenia = Integer.parseInt(args[1]);
             int poraDnia = Integer.parseInt(args[2]);
 
+            System.out.println(Math.toRadians(MyMath.angle(0,0,1,0)));
+            System.out.println(Math.toRadians(MyMath.angle(0,0,1,1)));
+            System.out.println(Math.toRadians(MyMath.angle(0,0,0,1)));
+            System.out.println(Math.toRadians(MyMath.angle(0,0,-1,1)));
+
+            System.out.println(Math.toRadians(MyMath.angle(0,0,-1,0)));
+            System.out.println(Math.toRadians(MyMath.angle(0,0,-1,-1)));
+            System.out.println(Math.toRadians(MyMath.angle(0,0,0,-1)));
+            System.out.println(Math.toRadians(MyMath.angle(0,0,1,-1)));
 /*
             Brain temp = new Brain(pathToDriver, 8);
             double result = temp.calculateResultDouble(new String[]{"sensor_0", "sensor_1", "sensor_2", "sensor_3", "sensor_4", "sensor_5", "sensor_6", "sensor_7"}, new Double[]{0.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0}, "movement");

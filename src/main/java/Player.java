@@ -5,12 +5,15 @@ import java.util.ArrayList;
 
 class Player{
     final static String[] sensorArray = new String[]{"sensor_0", "sensor_1", "sensor_2", "sensor_3", "sensor_4", "sensor_5", "sensor_6", "sensor_7"};
-    final static Double[] sensorValuesArray =  new Double[]{10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0};
+    static Double[] sensorValuesArray =  new Double[]{10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0};
     final ArrayList<Obstacle> obstacles;
 
     public double position_x = 0.0;
     public double position_y = 0.0;
     final double speed;
+
+    public double old_position_x = position_x;
+    public double old_position_y = position_y;
 
     private final double[] mapCords;
     private final Brain brain;
@@ -35,7 +38,7 @@ class Player{
                 double y2 = obstacle.y;
                 double x3 = position_x + 20 * Math.cos(Math.toRadians(i * 45));
                 double y3 = position_y + 20 * Math.sin(Math.toRadians(i * 45));
-                if( MyMath.distance(x1, y1, x2, y2) + MyMath.distance(x2, y2, x3, y3) == MyMath.distance(x1, y1, x3, y3) ){
+                if( MyMath.distance(x1, y1, x2, y2) + MyMath.distance(x2, y2, x3, y3) - MyMath.distance(x1, y1, x3, y3) < (double) 0.00001 ){
                     distance = Math.min( MyMath.distance(x1, y1, x2, y2), distance );
                 }
             }
@@ -47,9 +50,14 @@ class Player{
         checkSensors();
         try {
             double angle = brain.calculateResultDouble(sensorArray, sensorValuesArray, "movement");
+            if(angle >= 375){
+                return;
+            }
+            old_position_x = position_x;
+            old_position_y = position_y;
 
-            double x_movement = speed * Math.cos(Math.toRadians(angle));
-            double y_movement = speed * Math.sin(Math.toRadians(angle));
+            double x_movement = Math.cos(Math.toRadians(angle)) * speed;
+            double y_movement = Math.sin(Math.toRadians(angle)) * speed;
             this.position_x += x_movement;
             this.position_y += y_movement;
 
@@ -66,9 +74,6 @@ class Player{
         }
     }
 
-    public Circle getAvatar(){
-        return this.avatar;
-    }
 
 
 

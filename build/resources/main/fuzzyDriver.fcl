@@ -71,6 +71,7 @@ TERM angle_4 := (165, 0) (180, 1) (225, 1) (240, 0);
 TERM angle_5 := (210, 0) (225, 1) (270, 1) (285, 0);
 TERM angle_6 := (255, 0) (270, 1) (315, 1) (330, 0);
 TERM angle_7 := (300, 0) (315, 1) (360, 1) (375, 0);
+TERM no_movement := (419, 0) (420, 1);
 METHOD : COG;
 DEFAULT := 0;
 END_DEFUZZIFY
@@ -123,6 +124,8 @@ RULE 36: IF sensor_4 IS pretty_close THEN movement IS angle_1;
 RULE 37: IF sensor_5 IS pretty_close THEN movement IS angle_2;
 RULE 38: IF sensor_6 IS pretty_close THEN movement IS angle_3;
 RULE 39: IF sensor_7 IS pretty_close THEN movement IS angle_4;
+
+RULE 40: IF sensor_0 IS quite_far AND sensor_1 IS quite_far AND sensor_2 IS quite_far AND sensor_3 IS quite_far AND sensor_4 IS quite_far AND sensor_5 IS quite_far AND sensor_6 IS quite_far AND sensor_7 IS quite_far THEN movement IS no_movement;
 
 END_RULEBLOCK
 
