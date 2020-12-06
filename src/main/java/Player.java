@@ -2,7 +2,6 @@ import javafx.scene.shape.Circle;
 import model.Brain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 class Player{
     final static String[] sensorArray = new String[]{"sensor_0", "sensor_1", "sensor_2", "sensor_3", "sensor_4", "sensor_5", "sensor_6", "sensor_7"};
@@ -54,9 +53,6 @@ class Player{
         try {
             double angle = brain.calculateResultDouble(sensorArray, sensorValuesArray, "movement");
             lastAngle = angle;
-            if(angle >= 360){
-                return;
-            }
 
             old_position_x = position_x;
             old_position_y = position_y;
