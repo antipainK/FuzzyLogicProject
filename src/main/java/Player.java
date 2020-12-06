@@ -2,6 +2,7 @@ import javafx.scene.shape.Circle;
 import model.Brain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 class Player{
     final static String[] sensorArray = new String[]{"sensor_0", "sensor_1", "sensor_2", "sensor_3", "sensor_4", "sensor_5", "sensor_6", "sensor_7"};
@@ -11,12 +12,14 @@ class Player{
     public double position_x = 0.0;
     public double position_y = 0.0;
     final double speed;
+    public double lastAngle = 0.0;
 
     public double old_position_x = position_x;
     public double old_position_y = position_y;
 
     private final double[] mapCords;
     private final Brain brain;
+    private final static double sensorAngle = 45;
 
     public Circle avatar;
 
@@ -38,7 +41,7 @@ class Player{
                 double y2 = obstacle.y;
                 double x3 = position_x + 20 * Math.cos(Math.toRadians(i * 45));
                 double y3 = position_y + 20 * Math.sin(Math.toRadians(i * 45));
-                if( MyMath.distance(x1, y1, x2, y2) + MyMath.distance(x2, y2, x3, y3) - MyMath.distance(x1, y1, x3, y3) < (double) 0.00001 ){
+                if( MyMath.distance(x1, y1, x2, y2) + MyMath.distance(x2, y2, x3, y3) - (20.0 / Math.cos(Math.toRadians(22.5)))  /*MyMath.distance(x1, y1, x3, y3)*/ < (double) 0.00001  ){
                     distance = Math.min( MyMath.distance(x1, y1, x2, y2), distance );
                 }
             }
@@ -50,9 +53,11 @@ class Player{
         checkSensors();
         try {
             double angle = brain.calculateResultDouble(sensorArray, sensorValuesArray, "movement");
-            if(angle >= 375){
+            lastAngle = angle;
+            if(angle >= 360){
                 return;
             }
+
             old_position_x = position_x;
             old_position_y = position_y;
 
