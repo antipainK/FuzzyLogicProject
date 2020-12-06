@@ -28,7 +28,7 @@ public class Game extends Application{
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         primaryStage.setTitle("FuzzyGame - Wojciech Kosztyla");
         Group root = new Group();
         Scene scene = new Scene( root );
@@ -53,7 +53,7 @@ public class Game extends Application{
         new AnimationTimer()
         {
             long startFrameTime = System.nanoTime();
-            double coveringRadius = Math.sqrt( Math.pow(mapCords[2] - mapCords[0], 2) + Math.pow(mapCords[3] - mapCords[1], 2) ) / 2;
+            final double coveringRadius = Math.sqrt( Math.pow(mapCords[2] - mapCords[0], 2) + Math.pow(mapCords[3] - mapCords[1], 2) ) / 2;
 
             public void handle(long currentNanoTime)
             {
@@ -97,13 +97,7 @@ public class Game extends Application{
                         gc.beginPath();
                         gc.moveTo(temp[0], temp[1]);
                         double angle = Math.toRadians(player.lastAngle);
-                        double arrowPointerPositionX = temp[0] - (int)(Math.cos(angle) * playerDiameter * 2);
-                        double arrowPointerPositionY = temp[1] - (int)(Math.sin(angle) * playerDiameter * 2);
-                        gc.lineTo(arrowPointerPositionX, arrowPointerPositionY);
-                        gc.lineTo(arrowPointerPositionX + (int)(Math.cos(angle - 45) * playerDiameter / 2), arrowPointerPositionY + (int)(Math.sin(angle - 45) * playerDiameter / 2) );
-                        gc.lineTo(arrowPointerPositionX + (int)(Math.cos(angle + 45) * playerDiameter / 2), arrowPointerPositionY + (int)(Math.sin(angle + 45) * playerDiameter / 2) );
-                        gc.lineTo(arrowPointerPositionX, arrowPointerPositionY);
-                        gc.stroke();
+                        drawAngleArrow(temp, angle, playerDiameter, gc);
                     }
                     gc.setFill(Color.BLACK);
                     gc.fillOval(temp[0] - (int)(playerDiameter/2), temp[1] - (int)(playerDiameter/2), playerDiameter, playerDiameter);
@@ -113,13 +107,7 @@ public class Game extends Application{
                         gc.beginPath();
                         gc.moveTo(temp[0], temp[1]);
                         double angle = Math.toRadians(obstacle.angle);
-                        double arrowPointerPositionX = temp[0] - (int)(Math.cos(angle) * obstacleDiameter * 2);
-                        double arrowPointerPositionY = temp[1] - (int)(Math.sin(angle) * obstacleDiameter * 2);
-                        gc.lineTo(arrowPointerPositionX, arrowPointerPositionY);
-                        gc.lineTo(arrowPointerPositionX + (int)(Math.cos(angle - 45) * obstacleDiameter / 2), arrowPointerPositionY + (int)(Math.sin(angle - 45) * obstacleDiameter / 2) );
-                        gc.lineTo(arrowPointerPositionX + (int)(Math.cos(angle + 45) * obstacleDiameter / 2), arrowPointerPositionY + (int)(Math.sin(angle + 45) * obstacleDiameter / 2) );
-                        gc.lineTo(arrowPointerPositionX, arrowPointerPositionY);
-                        gc.stroke();
+                        drawAngleArrow(temp, angle, obstacleDiameter, gc);
                         gc.fillOval(temp[0] - (int)(obstacleDiameter/2), temp[1] - (int)(obstacleDiameter/2), obstacleDiameter, obstacleDiameter);
 
                     }
@@ -130,5 +118,15 @@ public class Game extends Application{
 
 
         primaryStage.show();
+    }
+
+    private void drawAngleArrow(int[] temp, double angle, int playerDiameter, GraphicsContext gc) {
+        double arrowPointerPositionX = temp[0] - (int)(Math.cos(angle) * playerDiameter * 2);
+        double arrowPointerPositionY = temp[1] - (int)(Math.sin(angle) * playerDiameter * 2);
+        gc.lineTo(arrowPointerPositionX, arrowPointerPositionY);
+        gc.lineTo(arrowPointerPositionX + (int)(Math.cos(angle - 45) * playerDiameter / 2), arrowPointerPositionY + (int)(Math.sin(angle - 45) * playerDiameter / 2) );
+        gc.lineTo(arrowPointerPositionX + (int)(Math.cos(angle + 45) * playerDiameter / 2), arrowPointerPositionY + (int)(Math.sin(angle + 45) * playerDiameter / 2) );
+        gc.lineTo(arrowPointerPositionX, arrowPointerPositionY);
+        gc.stroke();
     }
 }
