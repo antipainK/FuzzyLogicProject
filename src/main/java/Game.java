@@ -1,11 +1,14 @@
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.util.ArrayList;
 
@@ -30,6 +33,17 @@ public class Game extends Application{
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("FuzzyGame - Wojciech Kosztyla");
+        primaryStage.setOnCloseRequest(new EventHandler<>() {
+            @Override
+            public void handle(WindowEvent event) {
+                try {
+                    Platform.exit();
+                    System.exit(0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
         Group root = new Group();
         Scene scene = new Scene( root );
         primaryStage.setScene( scene );
