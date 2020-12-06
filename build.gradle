@@ -3,8 +3,8 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.9'
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
+group 'org.gabenrulez'
+version '1.0'
 
 repositories {
     mavenCentral()
@@ -13,6 +13,15 @@ repositories {
     }
     maven {
         url 'https://oss.sonatype.org/content/repositories/snapshots/'
+    }
+}
+
+jar{
+    manifest{
+        attributes 'Main-Class': 'Main'
+    }
+    from{
+        configurations.runtimeClasspath.collect{it.isDirectory() ? it : zipTree(it)}
     }
 }
 
@@ -27,6 +36,12 @@ javafx {
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'net.sourceforge.jFuzzyLogic', name: 'jFuzzyLogic', version: '1.+'
+}
+
+task runWithExecJarExecutable(type: Exec){
+    dependsOn jar
+    group = "Execution"
+    description = "Run the output executable jar with ExecTask"
+    commandLine "java", "-jar", jar.archiveFile.get()
 }
