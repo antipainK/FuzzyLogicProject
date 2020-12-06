@@ -1,0 +1,10 @@
+
+build/tmp/jar/MANIFEST.MF
+.gradle
+build
+.idea/compiler.xml
+.idea/.gitignore
+.idea/gradle.xml
+.idea/jarRepositories.xml
+.idea/misc.xml
+.idea/vcs.xml
