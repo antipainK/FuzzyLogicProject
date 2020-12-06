@@ -17,5 +17,11 @@ Minigame:
 - "main character" is using 8 of his sensors to get to know, what's around him and how far away it is
 - "main character" can use his "brain" to evaluate, which direction he should go to avoid the projectiles
 - "main character" doesn't like to stay in place, so he chooses to go right, whenever there's possibility for it
+
+___
+
+How to run:
+- if you are using IntelliJ, it's as easy as starting the default loaded configuration `CompileAndRun`
+- if you are using other IDE, you need to start `task runWithExecJarExecutable` - your application will compile and run automatically
  
 <a href="#0">Go back to the top</a>
