@@ -16,6 +16,7 @@ public class Game extends Application{
     private static final int screenWidth = 1000;
     private static final int screenHeight = 1000;
     private static final double fps = 60;
+    private static final boolean drawAreaLines = true;
 
     private static final int obstaclesAmount = 5;
     private static final int playerDiameter = (screenWidth + screenHeight)/2 /20;
@@ -101,7 +102,7 @@ public class Game extends Application{
                     //// DISPLAYING PART
                     gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());  // Clear screen
 
-                    drawLines(gc, canvas, mapCords);
+                    if(drawAreaLines) drawLines(gc, canvas, mapCords);
 
                     int[] tempOld = MyMath.translate(player.old_position_x, player.old_position_y, mapCords, canvas.getWidth(), canvas.getHeight());
                     gc.setFill(Color.GREY);
