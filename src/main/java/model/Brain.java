@@ -2,15 +2,14 @@ package model;
 
 import net.sourceforge.jFuzzyLogic.FIS;
 import net.sourceforge.jFuzzyLogic.rule.FuzzyRuleSet;
-import net.sourceforge.jFuzzyLogic.rule.LinguisticTerm;
 import net.sourceforge.jFuzzyLogic.rule.Variable;
 
 import javax.naming.directory.InvalidAttributesException;
-import java.util.Iterator;
+
 
 public class Brain {
 
-    boolean didShowGraphs = false;
+    boolean didShowGraphs = true;
 
     String fuzzyDriverPath;
     int amountOfVariables;
@@ -43,4 +42,6 @@ public class Brain {
 
         return variable.getLatestDefuzzifiedValue();
     }
+
+
 }

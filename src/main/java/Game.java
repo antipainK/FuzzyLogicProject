@@ -37,7 +37,7 @@ public class Game extends Application{
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle("FuzzyGame - Wojciech Kosztyla");
-        primaryStage.setOnCloseRequest(new EventHandler<>() {
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
             public void handle(WindowEvent event) {
                 try {
