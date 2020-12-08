@@ -1,3 +1,5 @@
+package model;
+
 public class Obstacle {
     public double x, y;
     public double angle;

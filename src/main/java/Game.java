@@ -1,3 +1,4 @@
+import helpers.MyMath;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -9,6 +10,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import model.Obstacle;
+import model.Player;
 
 import java.util.ArrayList;
 

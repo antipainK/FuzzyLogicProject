@@ -1,9 +1,11 @@
+package model;
+
+import helpers.MyMath;
 import javafx.scene.shape.Circle;
-import model.Brain;
 
 import java.util.ArrayList;
 
-class Player{
+public class Player{
     final static String[] sensorArray = new String[]{"sensor_0", "sensor_1", "sensor_2", "sensor_3", "sensor_4", "sensor_5", "sensor_6", "sensor_7"};
     static Double[] sensorValuesArray =  new Double[]{10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0};
     final ArrayList<Obstacle> obstacles;
@@ -40,7 +42,7 @@ class Player{
                 double y2 = obstacle.y;
                 double x3 = position_x + 20 * Math.cos(Math.toRadians(i * 45));
                 double y3 = position_y + 20 * Math.sin(Math.toRadians(i * 45));
-                if( MyMath.distance(x1, y1, x2, y2) + MyMath.distance(x2, y2, x3, y3) - (20.0 / Math.cos(Math.toRadians(22.5)))  /*MyMath.distance(x1, y1, x3, y3)*/ < (double) 0.00001  ){
+                if( MyMath.distance(x1, y1, x2, y2) + MyMath.distance(x2, y2, x3, y3) - (20.0 / Math.cos(Math.toRadians(22.5)))  /*helpers.MyMath.distance(x1, y1, x3, y3)*/ < (double) 0.00001  ){
                     distance = Math.min( MyMath.distance(x1, y1, x2, y2), distance );
                 }
             }
@@ -62,7 +64,7 @@ class Player{
             this.position_x += x_movement;
             this.position_y += y_movement;
 
-            mapCords[0] += x_movement;      // Player will be centered on the map
+            mapCords[0] += x_movement;      // model.Player will be centered on the map
             mapCords[1] += y_movement;
             mapCords[2] += x_movement;
             mapCords[3] += y_movement;

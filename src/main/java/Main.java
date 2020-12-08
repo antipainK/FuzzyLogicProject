@@ -3,7 +3,8 @@ public class Main {
     public static void main(String[] args) {
         if( args.length < 1){
             args = new String[1];
-            args[0] = "src/main/resources/fuzzyDriver.fcl";
+            //args[0] = "src/main/resources/fuzzyDriver.fcl";
+            args[0] = "/fuzzyDriver.fcl";
         }
         start(args);
     }
