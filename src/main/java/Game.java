@@ -101,6 +101,8 @@ public class Game extends Application{
                     //// DISPLAYING PART
                     gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());  // Clear screen
 
+                    drawLines(gc, canvas, mapCords);
+
                     int[] tempOld = MyMath.translate(player.old_position_x, player.old_position_y, mapCords, canvas.getWidth(), canvas.getHeight());
                     gc.setFill(Color.GREY);
                     gc.fillOval(tempOld[0] - (int)(playerDiameter/2), tempOld[1] - (int)(playerDiameter/2), playerDiameter, playerDiameter);
@@ -141,6 +143,32 @@ public class Game extends Application{
         gc.lineTo(arrowPointerPositionX + (int)(Math.cos(angle - 45) * playerDiameter / 2), arrowPointerPositionY + (int)(Math.sin(angle - 45) * playerDiameter / 2) );
         gc.lineTo(arrowPointerPositionX + (int)(Math.cos(angle + 45) * playerDiameter / 2), arrowPointerPositionY + (int)(Math.sin(angle + 45) * playerDiameter / 2) );
         gc.lineTo(arrowPointerPositionX, arrowPointerPositionY);
+        gc.stroke();
+    }
+
+    private void drawLines(GraphicsContext gc, Canvas canvas, double[] mapCords){
+        gc.beginPath();
+        int[] temp = MyMath.translate(  Math.floor(((mapCords[0] + 10))/10)*10, 0, mapCords, canvas.getWidth(), canvas.getHeight() );
+        gc.moveTo(temp[0], 0);
+        gc.lineTo(temp[0], canvas.getHeight());
+        gc.stroke();
+
+        gc.beginPath();
+        int[] temp2 = MyMath.translate(  Math.floor(((mapCords[0] + 20))/10)*10, 0, mapCords, canvas.getWidth(), canvas.getHeight() );
+        gc.moveTo(temp2[0], 0);
+        gc.lineTo(temp2[0], canvas.getHeight());
+        gc.stroke();
+
+        gc.beginPath();
+        temp = MyMath.translate(  0, Math.floor(((mapCords[1] + 10))/10)*10, mapCords, canvas.getWidth(), canvas.getHeight() );
+        gc.moveTo(0, temp[1]);
+        gc.lineTo(canvas.getWidth(), temp[1]);
+        gc.stroke();
+
+        gc.beginPath();
+        temp2 = MyMath.translate(  0, Math.floor(((mapCords[1] + 20))/10)*10, mapCords, canvas.getWidth(), canvas.getHeight() );
+        gc.moveTo(0, temp2[1]);
+        gc.lineTo(canvas.getWidth(), temp2[1]);
         gc.stroke();
     }
 }
