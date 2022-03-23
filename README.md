@@ -1,8 +1,8 @@
 
-# PSI_FuzzyLogicProject
+# FuzzyLogicProject
 <div id="0"></div>
 
-A project using FuzzyLogic (`jFuzzyLogic` library) for PSI course at AGH University.
+A project using FuzzyLogic (`jFuzzyLogic` library) for "Basics of Artificial Intelligence" ("Podstawy Sztucznej Inteligencji") course of Computer Science Bachelor's at AGH Academy of Science and Technology.
 
 Contains:
 - fuzzy logic driver
