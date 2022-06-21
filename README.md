@@ -8,7 +8,7 @@ Contains:
 - fuzzy logic driver
 - minigame controlled by evaluated values
 
-![](https://github.com/GabenRulez/PSI_FuzzyLogicProject/blob/master/readMePictures/video.gif?raw=true)
+![](https://github.com/antipainK/FuzzyLogicProject/blob/master/readMePictures/video.gif?raw=true)
 
 Minigame:
 - "main character" is the biggest circle in the middle
